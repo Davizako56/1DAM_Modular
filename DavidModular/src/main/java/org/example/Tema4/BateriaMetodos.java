@@ -1,4 +1,5 @@
 package org.example.Tema4;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -47,6 +48,104 @@ public class BateriaMetodos {
         System.out.println("Cadena en mayúsculas: " + resultado);
         System.out.println("Cantidad de vocales: " + Metodos.vocales(resultado));
 
+    }
+
+    static void ejercicio4() {
+
+        double[] vector = recaudacionSemana();
+
+        System.out.println("El día con más ventas ha sido el " + mayor(vector));
+        System.out.println("El día con menos ventas ha sido el " + menor(vector));
+        System.out.println("La media semanal ha sido " + mediaSemanal(vector) + "€");
+        System.out.println("Recaudación del domingo: " + domingo(vector) + "€");
+    }
+
+    public static double[] recaudacionSemana() {
+
+        double[] vector = new double[7];
+
+        System.out.println("Escribe los valores de cada dia de la semana:");
+
+        for (int i = 0; i < vector.length; i++) {
+
+            double num = entrada.nextDouble();
+            vector[i] = num;
+        }
+
+        System.out.println(Arrays.toString(vector));
+
+        return vector;
+    }
+
+    public static double domingo(double[] vector) {
+
+        return vector[6];
+    }
+
+    public static double mediaSemanal(double[] vector) {
+
+        double resultado = 0;
+
+        for (double n : vector) {
+
+            resultado += n;
+        }
+
+        return resultado / 7;
+    }
+
+    public static String menor(double[] vector) {
+
+        String dia = "";
+        String[] semana = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo"};
+
+        for (int i = 0; i < vector.length; i++) {
+
+            int contador = 5;
+            bucle2:
+            for (int j = 0; j < vector.length; j++) {
+
+                if (i == j){
+                    continue;
+                }else if (vector[i] < vector[j]){
+                    contador--;
+                }else if (vector[i] >= vector[j]){
+                    break bucle2;
+                }else if (contador == 0) {
+                    dia = semana[i];
+                    break;
+                }
+            }
+        }
+
+        return dia;
+    }
+
+    public static String mayor(double[] vector) {
+
+        String dia = "";
+        String[] semana = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo"};
+
+        for (int i = 0; i < vector.length; i++) {
+
+            int contador = 0;
+            bucle2:
+            for (int j = 0; j < vector.length; j++) {
+
+                if (i == j){
+                    continue;
+                }else if (vector[i] > vector[j]){
+                    contador++;
+                }else if (vector[i] <= vector[j]){
+                    break bucle2;
+                }else if (contador == 5) {
+                    dia = semana[i];
+                    break;
+                }
+            }
+        }
+
+        return dia;
     }
 
     public static void menu() {

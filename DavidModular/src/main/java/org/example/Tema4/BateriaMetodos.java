@@ -128,20 +128,10 @@ public class BateriaMetodos {
 
         for (int i = 0; i < vector.length; i++) {
 
-            int contador = 0;
-            bucle2:
-            for (int j = 0; j < vector.length; j++) {
+            double num = vector[i];
 
-                if (i == j){
-                    continue;
-                }else if (vector[i] > vector[j]){
-                    contador++;
-                }else if (vector[i] <= vector[j]){
-                    break bucle2;
-                }else if (contador == 5) {
-                    dia = semana[i];
-                    break;
-                }
+            for (double n : vector) {
+
             }
         }
 

@@ -27,4 +27,24 @@ public class Recursividad {
 
         return num;
     }
+
+    static void ejercicio3() {
+
+        int resultado = 0;
+        int i = 0;
+        System.out.println(sumar(resultado, i));
+
+    }
+
+    static int sumar(int num, int contador) {
+
+        if (contador < 10) {
+            contador++;
+            num += sumar(num+1, contador);
+        }
+
+        return num;
+    }
+
+
 }

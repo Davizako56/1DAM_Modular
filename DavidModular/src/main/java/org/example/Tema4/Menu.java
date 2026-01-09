@@ -8,6 +8,7 @@ public class Menu {
 
         int num;
         int potencia;
+        int eleccion;
 
         String[] vector = {"Dígitos","Potencias","Del Revés","Binario","A binario","Orden alfabético","Mostrar suma"};
 
@@ -46,9 +47,45 @@ public class Menu {
                 break;
 
             case 3:
-                System.out.println("Escribe un número:");
+                do {
+                    System.out.println("Elige que quieres imprimir del revés:");
+                    System.out.println("[1] - Número");
+                    System.out.println("[2] - Frase");
+                    eleccion = entrada.nextInt();
+
+                    if (eleccion == 1){
+                        System.out.println("Escribe un número:");
+                        num = entrada.nextInt();
+                        System.out.println("Número al reves:");
+                        delReves(num);
+                    }else if (eleccion == 2) {
+                        System.out.println("Escribe una cadena:");
+                        entrada.nextLine();
+                        String frase = entrada.nextLine();
+                        char[] cadena = frase.toCharArray();
+                        invertido(cadena.length - 1, cadena);
+                    }else{
+                        System.out.println("No es una opción compatible");
+                    }
+                }while (eleccion != 1 && eleccion != 2);
+                break;
+
+            case 4:
+                System.out.println("Escribe un número");
                 num = entrada.nextInt();
-                System.out.println("El número al revés es " + delReves(num));
+
+                if (binario(num)) {
+                    System.out.println("El número es binario");
+                }else{
+                    System.out.println("El número no es binario");
+                }
+                break;
+
+            case 5:
+                System.out.println("Escribe un número");
+                num = entrada.nextInt();
+                String bin = "";
+                obtenerBinario(num, bin);
                 break;
         }
     }
@@ -71,12 +108,49 @@ public class Menu {
         }
     }
 
-    static int delReves(int num) {
+    static void delReves(int num) {
 
         if (num < 10) {
-            return num;
+            System.out.print(num);
         }else{
-            return delReves(num % 10);
+            System.out.print(num % 10);
+            delReves(num / 10);
+        }
+    }
+
+    static void invertido(int posicion, char[] frase) {
+
+        if (posicion >= 0) {
+            System.out.print(frase[posicion]);
+            invertido(posicion - 1, frase);
+        }
+
+    }
+
+    static boolean binario(int num) {
+
+        if (num >= 10) {
+
+            if (num % 10 == 1 || num % 10 == 0) {
+                return binario(num / 10);
+            }else{
+                return false;
+            }
+        }else if (num == 1 || num == 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    static void obtenerBinario(int num, String bin) {
+
+        if (num == 1 || num == 0) {
+            System.out.println(num + bin);
+        }else{
+            bin = num % 2 + bin;
+            num = num / 2;
+            obtenerBinario(num, bin);
         }
     }
 }

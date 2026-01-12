@@ -4,11 +4,12 @@ import java.util.Scanner;
 public class Menu {
     static Scanner entrada = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main() {
 
         int num;
         int potencia;
         int eleccion;
+        String salida;
 
         String[] vector = {"Dígitos","Potencias","Del Revés","Binario","A binario","Orden alfabético","Mostrar suma"};
 
@@ -87,7 +88,26 @@ public class Menu {
                 String bin = "";
                 obtenerBinario(num, bin);
                 break;
+
+            default:
+                System.out.println("La opción no es válida.");
+                break;
         }
+
+        do {
+            System.out.println("Elige una opción:");
+            System.out.println("[M] -  Volver al menú principal.");
+            System.out.println("[X] - Salir");
+            salida = entrada.next();
+
+            if (salida.equalsIgnoreCase("M")) {
+                main();
+            }else if (salida.equalsIgnoreCase("S")) {
+                System.exit(0);
+            }else{
+                System.out.println("No es una opción válida.");
+            }
+        }while (!salida.equalsIgnoreCase("M") && !salida.equalsIgnoreCase("S"));
     }
 
     static int digitos(int num) {
